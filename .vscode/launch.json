@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Cimatron (ColorCriteriaSetDemo plugin)",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "prelaunch",
+            "program": "C:/Program Files/Cimatron/Cimatron/2026.0/Program/CimatronE.exe",
+            "args": [],
+            "cwd": "C:/Program Files/Cimatron/Cimatron/2026.0/Program",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "justMyCode": false
+        },
+        {
+            "name": "Attach to running Cimatron",
+            "type": "clr",
+            "request": "attach",
+            "processName": "CimatronE.exe",
+            "justMyCode": false
+        },
+        {
+            "name": "Build only",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "echo Build complete.",
+            "preLaunchTask": "prelaunch"
+        }
+    ]
+}

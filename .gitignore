@@ -1,0 +1,11 @@
+# Build output (this project deploys straight into the Cimatron Program folder)
+bin/
+obj/
+
+# VS / Rider / user files
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log.txt

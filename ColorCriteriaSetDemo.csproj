@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>ColorCriteriaSetDemo</RootNamespace>
+    <AssemblyName>ColorCriteriaSetDemo</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <OutputPath>$(CimatronRootPath)</OutputPath>
+    <ProjectGuid>3D8F2C1B-6E4A-4B9D-9C71-2A0F5E83D4A7</ProjectGuid>
+    <AssemblyTitle>ColorCriteriaSetDemo</AssemblyTitle>
+    <Product>ColorCriteriaSetDemo</Product>
+    <Description>ColorCriteriaSetDemo plugin for Cimatron 2026 — creates a color criteria set and recovers its filter.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="interop.CimDrftAPI">
+      <HintPath>$(CimatronRootPath)interop.CimDrftAPI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="interop.CimElectrodeAPI">
+      <HintPath>$(CimatronRootPath)interop.CimElectrodeAPI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="interop.CIMMiscAPI">
+      <HintPath>$(CimatronRootPath)interop.CIMMiscAPI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="interop.CimNcAPI">
+      <HintPath>$(CimatronRootPath)interop.CimNcAPI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="interop.CimServicesAPI">
+      <HintPath>$(CimatronRootPath)interop.CimServicesAPI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ColorCriteriaSetDemo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
