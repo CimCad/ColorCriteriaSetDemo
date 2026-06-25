@@ -21,7 +21,7 @@ the round-trip.
 var query  = (interop.CimMdlrAPI.IEntityQuery)model;
 var filter = query.CreateFilter(interop.CimMdlrAPI.EFilterEnumType.cmFilterColor);
 var colorFilter = (interop.CimBaseAPI.FilterColor)filter;
-colorFilter.Add(0xFF0000);                       // red, encoded 0xRRGGBB
+colorFilter.Add(0x0000FF);                       // red — packed Win32 COLORREF 0x00BBGGRR
 
 var factory = model.GetSetsFactory();            // interop.CimMdlrAPI.ISetsFactory
 try { factory.DeleteSet("DemoColorCriteriaSet"); } catch { }   // idempotent
@@ -34,7 +34,7 @@ var setAsQuery = (interop.CimMdlrAPI.IEntityQuery)set;   // ISet -> IEntityQuery
 var recovered  = setAsQuery.GetFilter();                // -> IEntityFilter
 var recoveredColor = (interop.CimBaseAPI.FilterColor)recovered;  // -> FilterColor
 int[] colors = recoveredColor.GetFilter();              // recovered color ints
-// colors == { 0xFF0000 }
+// colors == { 0x0000FF }   (red, in 0x00BBGGRR order)
 ```
 
 The full, runnable version (with the active-document plumbing and a result dialog) is in
@@ -42,8 +42,10 @@ The full, runnable version (with the active-document plumbing and a result dialo
 
 ## Notes & caveats
 
-- **Color encoding is `0xRRGGBB`** — *not* Win32's `0x00BBGGRR`. So red is `0xFF0000`, green is
-  `0x00FF00`, blue is `0x0000FF`. `FilterColor.GetFilter()` returns an `int[]` of those values.
+- **Color is a packed Win32 COLORREF** — `0x00BBGGRR`, i.e. `R | (G << 8) | (B << 16)` — **not**
+  `0xRRGGBB`. So **red is `0x0000FF`**, green is `0x00FF00`, and **blue is `0xFF0000`** (confirmed at
+  runtime: `0xFF0000` renders blue, because blue is the high byte). `FilterColor.GetFilter()` returns
+  an `int[]` of these packed values; decode with `R = v & 0xFF; G = (v >> 8) & 0xFF; B = (v >> 16) & 0xFF`.
 - **Fully-qualified interop names on purpose.** `interop.CimBaseAPI` and `interop.CimMdlrAPI` both
   declare `IEntityQuery`, `IEntityFilter`, `EFilterEnumType`, etc. If you `using` both namespaces in
   one file you'll hit `CS0104` (ambiguous reference) on every unqualified use. Either qualify fully

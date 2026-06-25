@@ -37,7 +37,9 @@ namespace ColorCriteriaSetDemo
                 var mdlModel = (interop.CimMdlrAPI.IModel)container.Model;
 
                 const string setName = "DemoColorCriteriaSet";
-                int targetColor = 0xFF0000;   // red, encoded 0xRRGGBB
+                // Color is a packed Win32 COLORREF: 0x00BBGGRR = R | (G<<8) | (B<<16).
+                // So red is 0x0000FF (NOT 0xRRGGBB); 0xFF0000 would be blue.
+                int targetColor = 0x0000FF;   // red
 
                 // ---- FORWARD: build a COLOR criteria set ----------------------
                 // The model is the entity-query factory. Ask it for a color
@@ -79,9 +81,13 @@ namespace ColorCriteriaSetDemo
                 }
 
                 sb.AppendLine("Recovered " + recoveredColors.Length
-                    + " color(s) from the set's filter:");
+                    + " color(s) from the set's filter (packed Win32 COLORREF 0x00BBGGRR):");
                 foreach (int c in recoveredColors)
-                    sb.AppendLine("    0x" + (c & 0xFFFFFF).ToString("X6"));
+                {
+                    int r = c & 0xFF, g = (c >> 8) & 0xFF, b = (c >> 16) & 0xFF;
+                    sb.AppendLine("    0x" + (c & 0xFFFFFF).ToString("X6")
+                        + "  (R=" + r + " G=" + g + " B=" + b + ")");
+                }
 
                 MessageBox.Show(sb.ToString(), "Color Criteria Set Demo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
